@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тести функцій JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+    <script>
+        function testCellPhoneNumber(str) {
+            if (!str.length) alert("Номер мобільного телефону задано некоректно");
+            var cellPhoneTemplate = new RegExp("8?((063)|(093))[0-9]{7}");
+            str = str.replace(cellPhoneTemplate, "");
+            if (str != "") alert("Номер мобільного телефону задано некоректно");
+        }
+
+        function testPhoneNumber(str) {
+            if (!str.length) alert("Номер телефону задано некоректно");
+            var phoneTemplate = new RegExp("2?[0-9]{6}");
+            str = str.replace(phoneTemplate, "");
+            if (str != "") alert("Номер телефону задано некоректно");
+        }
+
+        function removeRedundantSpaces(text_for_Editing) {
+            var extraSpaces = new RegExp("[ ]{2,}", "g");
+            return text_for_Editing.replace(extraSpaces, " ");
+        }
+
+        function clearTextFromHTMLTags(textForEditing) {
+            var tagTemplate = new RegExp("<\/?[a-zA-Z]{1,}\/?>", "g");
+            return textForEditing.replace(tagTemplate, "");
+        }
+
+        function checkWholePositiveNumber(str) {
+            if (!str.length) alert("Введіть ціле додатне число!!");
+            var re = new RegExp("[^0-9]", "g");
+            str = str.replace(re, "a");
+            if (str.indexOf("a") != -1) alert("Введіть ціле додатне число!!");
+        }
+
+        function checkEmail(str) {
+            if (!str.length) alert("Неправильний e-mail!");
+            var re = new RegExp("[a-zA-Z_.]+@{1}[a-zA-Z_.]+[\.]{1}[a-zA-Z_]+");
+            str = str.replace(re, "");
+            if (!str.length) alert('OK');
+            else alert("Неправильний e-mail!");
+        }
+    </script>
+</head>
+<body>
+
+<h2>Тест номеру мобільного телефону</h2>
+<input type="text" id="cellPhone" placeholder="Введіть номер мобільного телефону">
+<button onclick="testCellPhoneNumber(document.getElementById('cellPhone').value)">Тест</button>
+
+<h2>Тест номеру телефону</h2>
+<input type="text" id="phoneNumber" placeholder="Введіть номер телефону">
+<button onclick="testPhoneNumber(document.getElementById('phoneNumber').value)">Тест</button>
+
+<h2>Видалення зайвих пробілів</h2>
+<input type="text" id="redundantSpaces" placeholder="Введіть текст з зайвими пробілами" onblur="this.value=removeRedundantSpaces(this.value);">
+
+<h2>Очищення тексту з тегів HTML</h2>
+<textarea rows="5" cols="30" id="htmlText"></textarea>
+<button onclick="document.getElementById('htmlText').value=clearTextFromHTMLTags(document.getElementById('htmlText').value)">Очистити текст</button>
+
+<h2>Перевірити ціле додатне число</h2>
+<input type="text" id="wholeNumber" placeholder="Введіть ціле додатне число">
+<button onclick="checkWholePositiveNumber(document.getElementById('wholeNumber').value)">Тест</button>
+
+<h2>Перевірити e-mail</h2>
+<input type="text" id="email" placeholder="Введіть e-mail">
+<button onclick="checkEmail(document.getElementById('email').value)">Тест</button>
+
+</body>
+</html>
